@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depósito</title>
+</head>
+<body>
+    <h1>Fazer Depósito</h1>
+    <label for="valor">Valor em R$:</label><br>
+    <input type="number" id="valor" name="valor"><br><br>
+    <button onclick="gerarPix()">Depositar</button>
+
+    <script>
+        function gerarPix() {
+            var valor = document.getElementById('valor').value;
+            var pix = "Chave: 64992300284\nValor: R$" + valor;
+            alert("Copie e cole o código PIX abaixo:\n\n" + pix);
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}

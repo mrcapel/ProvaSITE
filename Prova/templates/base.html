@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Site</title>
+    <style>
+        /* Estilos para o menu */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center; /* Centraliza o conteúdo horizontalmente */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: inline-block; /* Para garantir que o menu seja centralizado */
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Incluir o menu -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'depositar' %}">Depositar</a></li>
+            <li><a href="{% url 'index' %}">Jogar</a></li>
+            <li><a href="{% url 'sacar' %}">Sacar</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+
+
