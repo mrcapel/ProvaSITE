@@ -3,70 +3,23 @@
 {% block content %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogar</title>
-    <style>
-        #jogar-button {
-            font-size: 24px;
-            padding: 20px 40px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        #gif-container img {
-            width: 200px; /* Defina o tamanho desejado da GIF */
-            height: auto;
-        }
-
-        #mensagem {
-            font-size: 36px; /* Aumente o tamanho da fonte da mensagem */
-            font-weight: bold;
-            color: red; /* Altere a cor do texto se desejar */
-        }
-    </style>
+    <title>Minhas Notas</title>
 </head>
 <body>
-    <h1>Jogar</h1>
-    <button id="jogar-button" onclick="iniciarJogo()">Jogar</button>
-    <div id="gif-container" style="display: none;">
-        <img src="https://i.pinimg.com/originals/16/ab/17/16ab17a98a7abb5c015b533236dc110d.gif" alt="GIF">
-    </div>
-    <div id="numeros-container" style="display: none;"></div>
-    <p id="mensagem" style="display: none;"></p>
-
-    <script>
-        function iniciarJogo() {
-            document.getElementById('jogar-button').style.display = 'none';
-            document.getElementById('gif-container').style.display = 'block';
-            document.getElementById('numeros-container').style.display = 'block';
-            
-            var numerosInterval = setInterval(function() {
-                document.getElementById('numeros-container').innerHTML = gerarNumerosAleatorios();
-            }, 500);
-
-            setTimeout(function() {
-                clearInterval(numerosInterval);
-                document.getElementById('gif-container').style.display = 'none';
-                document.getElementById('numeros-container').style.display = 'none';
-                document.getElementById('mensagem').innerText = "Sinto muito, mas você perdeu tudo! KKKKKKKKK";
-                document.getElementById('mensagem').style.display = 'block';
-            }, 5000);
-        }
-
-        function gerarNumerosAleatorios() {
-            var numeros = '';
-            for (var i = 0; i < 10; i++) {
-                numeros += Math.floor(Math.random() * 100) + ' ';
-            }
-            return numeros;
-        }
-    </script>
+    <h1>Minhas Notas</h1>
+    <form action="{% url 'salvar_nota' %}" method="POST">
+        {% csrf_token %}
+        <textarea name="nota" rows="4" cols="50" placeholder="Digite sua nota aqui"></textarea><br>
+        <button type="submit">Salvar Nota</button>
+    </form>
+    <!-- Aqui vamos exibir as notas salvas -->
+    {% for nota in notas %}
+        <p>{{ nota.texto }}</p>
+    {% endfor %}
 </body>
 </html>
 

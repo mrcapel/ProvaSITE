@@ -1,18 +1,12 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-
-# Create your views here.
-
+from django.shortcuts import render, redirect
+from .models import Nota
 
 def index(request):
-    return render(request, 'index.html')
+    notas = Nota.objects.all()
+    return render(request, 'index.html', {'notas': notas})
 
-def depositar(request):
-    return render(request, 'depositar.html')
-
-def sacar(request):
-    return render(request, 'sacar.html')
-
-def iniciar_jogo(request):
-    novo_jogo = {'estado': 'Novo'}
-    return JsonResponse(novo_jogo)
+def salvar_nota(request):
+    if request.method == 'POST':
+        nota_texto = request.POST.get('nota', '')
+        Nota.objects.create(texto=nota_texto)
+    return redirect('index')
