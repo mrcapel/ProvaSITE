@@ -14,7 +14,7 @@
     <form action="{% url 'salvar_nota' %}" method="POST">
         {% csrf_token %}
         <textarea name="nota" rows="4" cols="50" placeholder="Digite sua nota aqui"></textarea><br>
-        <button type="submit">Salvar Nota</button>
+        <button type="submit">Salvar Anotação</button>
     </form>
     <!-- Aqui vamos exibir as notas salvas -->
     {% for nota in notas %}
